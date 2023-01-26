@@ -11,6 +11,11 @@
 		29397E672981D0650007F3D1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29397E662981D0650007F3D1 /* ContentView.swift */; };
 		29397E692981D06B0007F3D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29397E682981D06B0007F3D1 /* Assets.xcassets */; };
 		29397E6C2981D06B0007F3D1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29397E6B2981D06B0007F3D1 /* Preview Assets.xcassets */; };
+		29397E742981D22C0007F3D1 /* OpenAISwift in Frameworks */ = {isa = PBXBuildFile; productRef = 29397E732981D22C0007F3D1 /* OpenAISwift */; };
+		29397E762981D4F30007F3D1 /* ChatGPTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29397E752981D4F30007F3D1 /* ChatGPTView.swift */; };
+		29397E782981D4FE0007F3D1 /* GlobalChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29397E772981D4FE0007F3D1 /* GlobalChatView.swift */; };
+		29397E7C29827A780007F3D1 /* GPTViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29397E7B29827A780007F3D1 /* GPTViewModel.swift */; };
+		29397E7E298282230007F3D1 /* Api-keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29397E7D298282230007F3D1 /* Api-keys.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +24,10 @@
 		29397E662981D0650007F3D1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		29397E682981D06B0007F3D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29397E6B2981D06B0007F3D1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		29397E752981D4F30007F3D1 /* ChatGPTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTView.swift; sourceTree = "<group>"; };
+		29397E772981D4FE0007F3D1 /* GlobalChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalChatView.swift; sourceTree = "<group>"; };
+		29397E7B29827A780007F3D1 /* GPTViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTViewModel.swift; sourceTree = "<group>"; };
+		29397E7D298282230007F3D1 /* Api-keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Api-keys.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29397E742981D22C0007F3D1 /* OpenAISwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,10 +61,13 @@
 		29397E632981D0650007F3D1 /* ChattingAPP */ = {
 			isa = PBXGroup;
 			children = (
+				29397E7A29827A620007F3D1 /* ViewModel */,
+				29397E7929827A4E0007F3D1 /* View */,
 				29397E642981D0650007F3D1 /* ChattingAPPApp.swift */,
 				29397E662981D0650007F3D1 /* ContentView.swift */,
 				29397E682981D06B0007F3D1 /* Assets.xcassets */,
 				29397E6A2981D06B0007F3D1 /* Preview Content */,
+				29397E7D298282230007F3D1 /* Api-keys.plist */,
 			);
 			path = ChattingAPP;
 			sourceTree = "<group>";
@@ -65,6 +78,23 @@
 				29397E6B2981D06B0007F3D1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		29397E7929827A4E0007F3D1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				29397E752981D4F30007F3D1 /* ChatGPTView.swift */,
+				29397E772981D4FE0007F3D1 /* GlobalChatView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		29397E7A29827A620007F3D1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				29397E7B29827A780007F3D1 /* GPTViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +113,9 @@
 			dependencies = (
 			);
 			name = ChattingAPP;
+			packageProductDependencies = (
+				29397E732981D22C0007F3D1 /* OpenAISwift */,
+			);
 			productName = ChattingAPP;
 			productReference = 29397E612981D0650007F3D1 /* ChattingAPP.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +144,9 @@
 				Base,
 			);
 			mainGroup = 29397E582981D0650007F3D1;
+			packageReferences = (
+				29397E722981D22C0007F3D1 /* XCRemoteSwiftPackageReference "OpenAISwift" */,
+			);
 			productRefGroup = 29397E622981D0650007F3D1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -126,6 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29397E6C2981D06B0007F3D1 /* Preview Assets.xcassets in Resources */,
+				29397E7E298282230007F3D1 /* Api-keys.plist in Resources */,
 				29397E692981D06B0007F3D1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,8 +174,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29397E782981D4FE0007F3D1 /* GlobalChatView.swift in Sources */,
 				29397E672981D0650007F3D1 /* ContentView.swift in Sources */,
 				29397E652981D0650007F3D1 /* ChattingAPPApp.swift in Sources */,
+				29397E7C29827A780007F3D1 /* GPTViewModel.swift in Sources */,
+				29397E762981D4F30007F3D1 /* ChatGPTView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +379,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		29397E722981D22C0007F3D1 /* XCRemoteSwiftPackageReference "OpenAISwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/adamrushy/OpenAISwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		29397E732981D22C0007F3D1 /* OpenAISwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29397E722981D22C0007F3D1 /* XCRemoteSwiftPackageReference "OpenAISwift" */;
+			productName = OpenAISwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 29397E592981D0650007F3D1 /* Project object */;
 }
