@@ -21,15 +21,14 @@ struct ChatGPTView: View {
                             if string.contains("Me: "){
                                 HStack{
                                     Spacer()
-                                    var newString = string.replacingOccurrences(of: "Me: ", with: "")
-                                    Text(newString).foregroundColor(.green)
-
+                                    let newString = string.replacingOccurrences(of: "Me: ", with: "")
+                                    MessageView(message: newString, isUserMessage: true)
                                 }
                                 .padding()
                             }
                             else {
                                 HStack{
-                                    Text(string)
+                                    MessageView(message: string, isUserMessage: false)
                                     Spacer()
                                 }
 
@@ -85,6 +84,24 @@ struct ChatGPTView: View {
                 self.typingMessage = ""
             }
         }
+    }
+}
+
+
+
+struct MessageView: View{
+    
+    var message: String
+    var isUserMessage: Bool
+    
+    var body: some View{
+        Text(self.message)
+            .padding(10)
+            .foregroundColor(isUserMessage ? .white : .black)
+            .background(isUserMessage ? Color.blue : Color.gray.opacity(0.25))
+            .cornerRadius(15)
+
+        
     }
 }
 
