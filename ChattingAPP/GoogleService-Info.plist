@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>364348848058-sor2oa3nmngr1v649oqersbp5b4nq2p3.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.364348848058-sor2oa3nmngr1v649oqersbp5b4nq2p3</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAy0a0yh-EYsXp8Hl96RelnxFJ72Id712M</string>
+	<key>GCM_SENDER_ID</key>
+	<string>364348848058</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>mbabicz.chattingapp</string>
+	<key>PROJECT_ID</key>
+	<string>chattingapp-293de</string>
+	<key>STORAGE_BUCKET</key>
+	<string>chattingapp-293de.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:364348848058:ios:5367f51237d0e24c318f83</string>
+</dict>
+</plist>

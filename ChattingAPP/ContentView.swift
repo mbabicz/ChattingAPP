@@ -8,20 +8,50 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @EnvironmentObject var user: UserViewModel
+
     var body: some View {
         NavigationView{
-            TabView{
-                ChatGPTView().tabItem {
-                    Image("bot")
-                        .resizable()
-                }.tag(0)
+            if user.userIsAuthenticated && !user.userIsAuthenticatedAndSynced {
+                VStack{
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .black)).frame(alignment: .center).scaleEffect(3).padding()
+                    Button {
+                        user.signOut()
+                    } label: {
+                        Text("logout")
+                    }
+
+                }
+            }
+            else if user.userIsAuthenticatedAndSynced{
                 
-                GlobalChatView().tabItem {
-                    Image("global")
+                TabView{
+                    ChatBotView().tabItem {
+                        Image("bot")
+                            .resizable()
+                    }.tag(0)
                     
-                }.tag(1)
+                    GlobalChatView().tabItem {
+                        Image("global")
+                        
+                    }.tag(1)
+                    
+                }.accentColor(.green)
                 
-            }.accentColor(.green)
+                ChatBotView()
+
+            }
+            else{
+                AuthenticationView()
+
+            }
+        }
+        .onAppear{
+            if user.userIsAuthenticated{
+                user.syncUser()
+            }
         }
     }
 }
