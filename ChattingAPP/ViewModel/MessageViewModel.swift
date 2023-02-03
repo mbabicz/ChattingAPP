@@ -15,7 +15,6 @@ class MessageViewModel: ObservableObject {
     let db = Firestore.firestore()
     @Published var messages: [Message]?
     
-    
     func sendMessage(message: String) {
         guard let userID = Auth.auth().currentUser?.uid else { return }
         

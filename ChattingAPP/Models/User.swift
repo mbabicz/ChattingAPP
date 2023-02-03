@@ -12,5 +12,6 @@ struct User: Codable {
     var username: String
     var signUpDate = Date.now
     var userEmail: String
+    var pushNotifications: Bool?
     
 }

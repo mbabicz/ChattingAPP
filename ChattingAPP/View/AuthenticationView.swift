@@ -6,7 +6,6 @@
 //
 import SwiftUI
 
-
 struct AuthenticationView: View {
     
     @EnvironmentObject var user: UserViewModel
@@ -22,7 +21,6 @@ struct AuthenticationView: View {
                 dismissButton: .default(Text("OK"))
             )
         }
-        
     }
     
 }

@@ -13,36 +13,38 @@ struct GlobalChatView: View {
     @EnvironmentObject var user: UserViewModel
     @StateObject var messageVM = MessageViewModel()
     @Namespace var bottomID
-
     
     var body: some View {
         NavigationView(){
             VStack{
                 ScrollViewReader{ reader in
-                    
                     ScrollView {
                         ForEach(messageVM.messages?.sorted(by: { $0.sentDate < $1.sentDate }) ?? [], id: \.self) { message in
-                            MessageView(message: message.message, isUserMessage: message.userID == user.userID, isLastMessage: isLastMessage(for: message))
+                            MessageView(message: message.message, isUserMessage: message.userID == user.userID, isLastMessage: isLastMessage(for: message),userID: message.userID)
                                 .id(message.id)
                         }
                         Text("").id(bottomID)
                     }
                     
                     .onAppear{
-                        reader.scrollTo(bottomID)
+                        withAnimation{
+                            reader.scrollTo(bottomID)
+                        }
                     }
                     .onChange(of: messageVM.messages?.count){ _ in
-                        reader.scrollTo(bottomID)
+                        withAnimation{
+                            reader.scrollTo(bottomID)
+                        }
                     }
                     
                 }
-                
 
                 Spacer()
                 Divider()
                 HStack{
-                    TextField("Message...", text: $typingMessage)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    TextField("Message...", text: $typingMessage, axis: .vertical)
+                        .textFieldStyle(.roundedBorder)
+                        .lineLimit(5)
                         .padding()
                     
                     Button {
@@ -51,7 +53,7 @@ struct GlobalChatView: View {
                             typingMessage = ""
                         }
                     } label: {
-                        Image(systemName: "arrowshape.turn.up.right.circle.fill")
+                        Image(systemName: "arrow.up.circle.fill")
                             .resizable()
                             .frame(width: 42, height: 42)
                             .padding(.trailing)
@@ -69,10 +71,20 @@ struct GlobalChatView: View {
                     Button {
                         user.signOut()
                     } label: {
-                        Text("Wyloguj się").font(.headline).foregroundColor(.green)
+                        Text("Log out")
+                            .font(.headline)
+                            .foregroundColor(.green)
   
                     }
-                    
+                }
+                ToolbarItem(placement: .navigationBarLeading){
+                    NavigationLink {
+                        SettingsView()
+                    } label: {
+                        Image(systemName: "gearshape.fill")
+                            .foregroundColor(.green)
+
+                    }
                 }
             }
             .onAppear{

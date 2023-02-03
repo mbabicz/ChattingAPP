@@ -41,7 +41,7 @@ class UserViewModel: ObservableObject {
                 self.showingAlert = true
             } else {
                 DispatchQueue.main.async{
-                    self.addUser(User(username: username, userEmail: email))
+                    self.addUser(User(username: username, userEmail: email, pushNotifications: true))
                     self.syncUser()
                 }
             }
@@ -120,7 +120,7 @@ class UserViewModel: ObservableObject {
         
     }
     
-    private func update(){
+    func update(){
         guard userIsAuthenticatedAndSynced else { return }
         do{
             let _ = try db.collection("Users").document(self.userID!).setData(from: user)
@@ -129,4 +129,31 @@ class UserViewModel: ObservableObject {
         }
         
     }
+
+    func getUserByUID(userID: String, completion: @escaping (User?) -> Void) {
+        let ref = db.collection("Users").document(userID)
+        ref.getDocument { snapshot, error in
+            if let error = error {
+                print("Error getting user from db: \(error)")
+                completion(nil)
+                return
+            }
+
+            guard let data = snapshot?.data(),
+                  let username = data["username"] as? String,
+                  let userEmail = data["userEmail"] as? String
+            else {
+                completion(nil)
+                return
+            }
+
+            let user = User(username: username, userEmail: userEmail)
+            completion(user)
+        }
+    }
+
+    
+//    private func changeNotificationsSettings(){
+//
+//    }
 }

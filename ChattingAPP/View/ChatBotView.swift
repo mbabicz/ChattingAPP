@@ -7,61 +7,67 @@
 import SwiftUI
 
 struct ChatBotView: View {
+    
     @ObservedObject var botVM = ChatBotViewModel()
     @State var typingMessage: String = ""
     @State var models = [String]()
+    @Namespace var bottomID
     
     var body: some View {
-        VStack{
-
-            ScrollView(.vertical) {
+        NavigationView(){
+            VStack{
                 ScrollViewReader { reader in
-                    ForEach(models, id: \.self) { message in
-                        HStack {
-                            if message.contains("Me: ") {
-                                Spacer()
+                    ScrollView(.vertical) {
+                        
+                        ForEach(models, id: \.self) { message in
+                            HStack {
+                                Spacer(minLength: message.contains("Me: ") ? 0 : 20)
                                 MessageView(
-                                    message: message.replacingOccurrences(of: "Me: ", with: ""),
-                                    isUserMessage: true,
+                                    message: message.contains("Me: ") ? message.replacingOccurrences(of: "Me: ", with: "") : message,
+                                    isUserMessage: message.contains("Me: "),
                                     isLastMessage: true
                                 )
-                            } else {
-                                MessageView(
-                                    message: message,
-                                    isUserMessage: false,
-                                    isLastMessage: true
-                                )
-                                Spacer()
+                                Spacer(minLength: message.contains("Me: ") ? 20 : 0)
                             }
                         }
-                        .padding()
+                        Text("").id(bottomID)
                     }
-                    .padding()
+                    .onAppear{
+                        withAnimation{
+                            reader.scrollTo(bottomID)
+                        }
+                    }
+                    .onChange(of: models.count){ _ in
+                        withAnimation{
+                            reader.scrollTo(bottomID)
+                        }
+                    }
+                }
+                Divider()
+                HStack {
+                    TextField("Message...", text: $typingMessage, axis: .vertical)
+                        .textFieldStyle(.roundedBorder)
+                        .lineLimit(5)
+                        .padding()
+                        .disableAutocorrection(true)
+                        .autocapitalization(.none)
+                    Button(action: send) {
+                        Image(systemName: "arrowshape.turn.up.right.circle.fill")
+                            .resizable()
+                            .frame(width: 42, height: 42)
+                            .padding(.trailing)
+                            .foregroundColor(.green)
+                    }
                 }
             }
-
-            Divider()
-            HStack {
-                TextField("Message...", text: $typingMessage)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                    .disableAutocorrection(true)
-                    .autocapitalization(.none)
-                
-                Button(action: send) {
-                    Image(systemName: "arrowshape.turn.up.right.circle.fill")
-                        .resizable()
-                        .frame(width: 42, height: 42)
-                        .padding(.trailing)
-                        .foregroundColor(.green)
-                }
-            }
+            
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitle("ChatBot")
         }
         .onAppear {
             botVM.setup()
         }
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarTitle("ChatBot")
+
         
     }
     
