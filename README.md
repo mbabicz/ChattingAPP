@@ -4,6 +4,10 @@ Chat app with OpenAI chatbot
 ## ABOUT THE PROJECT
 Chat application  that contains OpenAI chat bot. OpenAI client implemented with [this library](https://github.com/adamrushy/OpenAISwift). To use OpenAI you need to get your api [here](https://openai.com/api/). Realtime chat and authentication are based on [Firebase](https://firebase.google.com/). 
 
+## Installation
+* Install all required pods (Firebase, OpenAISwift) <br />
+* Enter your api key here: _ChattingAPP/ViewModel/ChatBotViewModel.swift_ <br />
+
 __OpenAI ChatBot__
 
 <img src = "https://user-images.githubusercontent.com/49866616/216791972-e28891b1-610f-42e9-870f-f0d8dad6839d.png"  width="286" height="558" /> <img src = "https://user-images.githubusercontent.com/49866616/216792030-35d10a89-3c0c-409d-86a0-a1e048dc0d09.png"  width="286" height="558" /> <br />
