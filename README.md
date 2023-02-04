@@ -7,4 +7,5 @@ __OpenAI ChatBot__
 
 __Global Chat__
 
-![chat imgs](https://user-images.githubusercontent.com/49866616/216429028-97bda33d-2032-4f5e-9be8-d2636fd1fec9.png)
+![1](https://user-images.githubusercontent.com/49866616/216786690-583b1f50-4235-4eb7-b4de-d62234bdca8b.png)
+![2](https://user-images.githubusercontent.com/49866616/216786714-bb5dd777-16e8-4a9f-ba28-ce932bfcff80.png)
