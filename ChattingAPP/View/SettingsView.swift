@@ -11,15 +11,35 @@ struct SettingsView: View {
     
     @State var notifactionsToggle: Bool = false
     @EnvironmentObject var user: UserViewModel
+    @State private var showImagePicker = false
+    @State private var inputImage: UIImage?
+    @State private var image: Image?
     
     var body: some View {
         NavigationView {
             VStack{
                 HStack{
                     Spacer()
-                    ProfilePictureView()
+                    if let user = user.user {
+                        if let image = image {
+                            image
+                                .resizable()
+                                .frame(height: 150)
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(Circle())
+                        } else {
+                            ProfileImageView(imageURL: user.imageURL, width: 150, height: 150)
+                        }
+                    }
+
                     Spacer()
                 }
+                Button {
+                    showImagePicker = true
+                } label: {
+                    Text("Upload image")
+                }
+                
                 Divider()
                 Toggle(
                     isOn: $notifactionsToggle,
@@ -36,6 +56,9 @@ struct SettingsView: View {
                 .padding()
                 Button {
                     user.user?.pushNotifications = notifactionsToggle
+                    if image != nil {
+                        user.uploadUserImage(image: self.inputImage!)
+                    }
                     user.update()
                 } label: {
                     Text("Save")
@@ -52,25 +75,26 @@ struct SettingsView: View {
             Spacer()
         }
         .onAppear{
-            notifactionsToggle = user.user!.pushNotifications!
+            notifactionsToggle = user.user!.pushNotifications ?? true
         }
+        .sheet(isPresented: $showImagePicker){
+            ImagePicker(image: $inputImage)
+        }
+        .onChange(of: inputImage) { _ in loadImage() }
+
+        
+
     }
+    
+    func loadImage() {
+        guard inputImage != nil else { return }
+        image = Image(uiImage: inputImage!)
+    }
+    
 }
 
-struct ProfilePictureView: View {
-    var body: some View {
-        VStack{
-            Image(systemName: "person.fill")
-            Button {
-                //
-            } label: {
-                Text("Change profile picture")
-            }
-        }
-        .padding()
-    }
-}
 
+    
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView(notifactionsToggle: false)

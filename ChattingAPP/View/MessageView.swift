@@ -16,24 +16,33 @@ struct MessageView: View {
     @State private var sentBy: User?
     
     var body: some View {
-        HStack {
+        HStack(spacing: 0) {
             if isUserMessage {
                 Spacer()
             }
-            VStack(alignment: .leading,spacing: 0){
+            HStack(alignment: .top, spacing: 0){
                 if !isUserMessage, let sentBy = sentBy {
-                    Text(sentBy.username)
-                        .font(.footnote)
-                        .foregroundColor(.black.opacity(0.5))
-                        .padding(.leading, 10)
+                    ProfileImageView(imageURL: sentBy.imageURL, width: 30, height: 30)
+                        .padding(.top, 20)
+                        .padding(.trailing, 5)
+                }
+                VStack(alignment: .leading,spacing: 0){
+                    if !isUserMessage, let sentBy = sentBy {
+                        Text(sentBy.username)
+                            .font(.footnote)
+                            .foregroundColor(.black.opacity(0.5))
+                            .padding(.leading, 10)
+                        
+                    }
+                    Text(message)
+                        .padding(10)
+                        .font(.callout)
+                        .foregroundColor(isUserMessage ? .white : .black)
+                        .background(isUserMessage ? Color.green : Color.gray.opacity(0.25))
+                        .cornerRadius(25)
+                    
                     
                 }
-                Text(message)
-                    .padding(10)
-                    .foregroundColor(isUserMessage ? .white : .black)
-                    .background(isUserMessage ? Color.green : Color.gray.opacity(0.25))
-                    .cornerRadius(25)
-                
             }
 
             if !isUserMessage {
@@ -41,7 +50,6 @@ struct MessageView: View {
             }
 
         }
-        //.padding(.top, isLastMessage ? 10 : 0)
         .padding(.leading, 10)
         .padding(.trailing, 10)
 

@@ -9,6 +9,9 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import Firebase
+import SwiftUI
+import FirebaseStorage
 
 class UserViewModel: ObservableObject {
     
@@ -41,7 +44,7 @@ class UserViewModel: ObservableObject {
                 self.showingAlert = true
             } else {
                 DispatchQueue.main.async{
-                    self.addUser(User(username: username, userEmail: email, pushNotifications: true))
+                    self.addUser(User(username: username, userEmail: email, pushNotifications: true, image: "https://firebasestorage.googleapis.com/v0/b/chattingapp-293de.appspot.com/o/profile_img.png?alt=media&token=95e18e55-d066-4fa6-9709-42b0b56841c1https://firebasestorage.googleapis.com/v0/b/chattingapp-293de.appspot.com/o/profile_img.png?alt=media&token=95e18e55-d066-4fa6-9709-42b0b56841c1"))
                     self.syncUser()
                 }
             }
@@ -138,22 +141,47 @@ class UserViewModel: ObservableObject {
                 completion(nil)
                 return
             }
-
+            
             guard let data = snapshot?.data(),
                   let username = data["username"] as? String,
-                  let userEmail = data["userEmail"] as? String
+                  let userEmail = data["userEmail"] as? String,
+                  let image = data["image"] as? String
+                    
             else {
                 completion(nil)
                 return
             }
-
-            let user = User(username: username, userEmail: userEmail)
+            
+            let user = User(username: username, userEmail: userEmail, image: image)
             completion(user)
         }
     }
-
     
-//    private func changeNotificationsSettings(){
-//
-//    }
+    public func uploadUserImage(image: UIImage) {
+        let storage = Storage.storage()
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
+        
+        let imgReference = storage.reference().child("\(userID).jpeg")
+        imgReference.putData(imageData, metadata: nil) { (metadata, error) in
+            if let error = error {
+                print("Error uploading image: \(error.localizedDescription)")
+                return
+            }
+            
+            print("Image uploaded successfully")
+            imgReference.downloadURL { (url, error) in
+                if let error = error {
+                    print("Error getting download URL: \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let url = url else { return }
+                let imageURLString = url.absoluteString
+                self.user?.image = imageURLString
+                self.update()
+            }
+        }
+    }
+
+
 }
