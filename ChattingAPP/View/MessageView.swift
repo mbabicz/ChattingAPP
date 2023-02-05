@@ -11,6 +11,7 @@ struct MessageView: View {
     @EnvironmentObject var user: UserViewModel
     var message: String
     var isUserMessage: Bool
+    var isBotMessage: Bool
     var isLastMessage: Bool
     var userID: String?
     @State private var sentBy: User?
@@ -32,7 +33,12 @@ struct MessageView: View {
                             .font(.footnote)
                             .foregroundColor(.black.opacity(0.5))
                             .padding(.leading, 10)
-                        
+                    }
+                    else if isBotMessage{
+                        Text("OPENAI BOT")
+                            .font(.footnote)
+                            .foregroundColor(.black.opacity(0.5))
+                            .padding(.leading, 10)
                     }
                     Text(message)
                         .padding(10)
@@ -40,8 +46,6 @@ struct MessageView: View {
                         .foregroundColor(isUserMessage ? .white : .black)
                         .background(isUserMessage ? Color.green : Color.gray.opacity(0.25))
                         .cornerRadius(25)
-                    
-                    
                 }
             }
 
@@ -60,8 +64,6 @@ struct MessageView: View {
                 }
             }
         }
-        
     }
-
 
 }

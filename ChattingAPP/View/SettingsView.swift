@@ -31,7 +31,7 @@ struct SettingsView: View {
                             ProfileImageView(imageURL: user.imageURL, width: 150, height: 150)
                         }
                     }
-
+                    
                     Spacer()
                 }
                 Button {
@@ -68,7 +68,7 @@ struct SettingsView: View {
                         .background(Color.green)
                         .cornerRadius(45)
                         .padding()
-
+                    
                 }
                 Spacer()
             }
@@ -81,9 +81,7 @@ struct SettingsView: View {
             ImagePicker(image: $inputImage)
         }
         .onChange(of: inputImage) { _ in loadImage() }
-
         
-
     }
     
     func loadImage() {
@@ -92,8 +90,6 @@ struct SettingsView: View {
     }
     
 }
-
-
     
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {

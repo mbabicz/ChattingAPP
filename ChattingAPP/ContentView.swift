@@ -22,12 +22,12 @@ struct ContentView: View {
                     } label: {
                         Text("logout")
                     }
-
                 }
             }
             else if user.userIsAuthenticatedAndSynced{
                 
                 TabView{
+                    
                     ChatBotView().tabItem {
                         Image("bot")
                             .resizable()
@@ -45,7 +45,6 @@ struct ContentView: View {
             }
             else{
                 AuthenticationView()
-
             }
         }
         .onAppear{

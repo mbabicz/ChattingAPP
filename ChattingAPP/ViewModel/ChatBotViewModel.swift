@@ -8,8 +8,9 @@
 import Foundation
 import OpenAISwift
 
-
 class ChatBotViewModel: ObservableObject{
+    
+    var isWaitingForResponse: Bool = false
     
     private var apiKey: String {
         guard let filePath = Bundle.main.path(forResource: "Api-keys", ofType: "plist"),
@@ -29,23 +30,25 @@ class ChatBotViewModel: ObservableObject{
     
     func setup(){
         client = OpenAISwift(authToken: apiKey)
-        
     }
     
-    func send(text: String, completion: @escaping (String) -> Void){
+    func send(text: String, completion: @escaping (String) -> Void) {
+        self.isWaitingForResponse = true
+        print(self.isWaitingForResponse)
 
-        client?.sendCompletion(with: text, maxTokens: 500, completionHandler: { result in
+        client?.sendCompletion(with: text, maxTokens: 500, completionHandler: { [weak self] result in
+            guard self != nil else { return }
             switch result {
             case .success(let model):
                 let output = model.choices.first?.text ?? ""
-
                 completion(output)
-            case .failure(let failure):
-                print(failure.localizedDescription)
+                self!.isWaitingForResponse = false
+                print(self!.isWaitingForResponse)
+
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         })
-
     }
-    
-}
 
+}

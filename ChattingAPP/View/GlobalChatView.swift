@@ -20,7 +20,7 @@ struct GlobalChatView: View {
                 ScrollViewReader{ reader in
                     ScrollView {
                         ForEach(messageVM.messages?.sorted(by: { $0.sentDate < $1.sentDate }) ?? [], id: \.self) { message in
-                            MessageView(message: message.message, isUserMessage: message.userID == user.userID, isLastMessage: isLastMessage(for: message),userID: message.userID)
+                            MessageView(message: message.message, isUserMessage: message.userID == user.userID, isBotMessage: false, isLastMessage: isLastMessage(for: message) ,userID: message.userID)
                                 .id(message.id)
                         }
                         Text("").id(bottomID)
@@ -36,16 +36,15 @@ struct GlobalChatView: View {
                             reader.scrollTo(bottomID)
                         }
                     }
-                    
                 }
 
                 Spacer()
                 Divider()
-                HStack{
+                HStack(alignment: .top){
                     TextField("Message...", text: $typingMessage, axis: .vertical)
+                        .padding(.leading)
                         .textFieldStyle(.roundedBorder)
                         .lineLimit(5)
-                        .padding()
                     
                     Button {
                         if (typingMessage != ""){
@@ -53,16 +52,14 @@ struct GlobalChatView: View {
                             typingMessage = ""
                         }
                     } label: {
-                        Image(systemName: "arrow.up.circle.fill")
-                            .resizable()
-                            .frame(width: 42, height: 42)
+                        Image(systemName: "paperplane.fill")
                             .padding(.trailing)
                             .foregroundColor(.green)
-                        
+                            .rotationEffect(.degrees(45))
+                            .font(.system(size: 36))
                     }
-                    
                 }
-                
+                .padding(.top)
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarTitle("Global chat")
@@ -98,7 +95,6 @@ struct GlobalChatView: View {
         return index == messages.count - 1
     }
 }
-
 
 struct GlobalChat_Previews: PreviewProvider {
     static var previews: some View {

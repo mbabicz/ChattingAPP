@@ -31,7 +31,6 @@ struct SignInView: View {
 
     @State var email = ""
     @State var password = ""
-
     @State var isSecured: Bool = true
     
     var body: some View {
@@ -92,18 +91,14 @@ struct SignInView: View {
                     Text("Don't have an account yet?")
                         .padding([.top, .leading, .trailing])
                     NavigationLink("Sign up", destination: SignUpView()).padding([.leading, .bottom, .trailing]).foregroundColor(Color.green)
-
                 }
                 .padding()
                 Spacer()
-
             }
             .navigationTitle("Sign in")
 
         }
-        
     }
-    
 }
 
 struct SignUpView: View {
@@ -117,7 +112,6 @@ struct SignUpView: View {
 
     @State var isSecured: Bool = true
     @State var isSecuredConfirmation: Bool = true
-
 
     var body: some View {
         VStack {
@@ -211,9 +205,7 @@ struct SignUpView: View {
                             .background(Color.green)
                             .cornerRadius(45)
                             .padding()
-
                     }
-
                 }
                 .padding()
                 Spacer()
@@ -221,29 +213,23 @@ struct SignUpView: View {
             .navigationTitle("Create account")
 
         }
-        
     }
-    
 }
 
 struct ResetPasswordView: View {
     
     @State var email = ""
-    
     @EnvironmentObject var user: UserViewModel
     
     var body: some View {
         VStack {
             VStack{
                 VStack{
-                    
                     TextField("Email", text: $email).padding()
                         .disableAutocorrection(true)
                         .autocapitalization(.none)
                         .background(Color(.secondarySystemBackground))
-                    
                 }
-                
                 Button {
                     if !email.isEmpty {
                         user.resetPassword(email: email)
@@ -263,13 +249,11 @@ struct ResetPasswordView: View {
                         .cornerRadius(45)
                         .padding()
                 }
-                
             }
             .padding()
             Spacer()
         }
         .navigationTitle("Recover password")
-        
     }
     
 }

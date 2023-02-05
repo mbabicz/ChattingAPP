@@ -30,7 +30,6 @@ class MessageViewModel: ObservableObject {
             }
         }
     }
-
     
     func getMessages() {
         let ref = db.collection("Messages")
@@ -50,7 +49,5 @@ class MessageViewModel: ObservableObject {
             }
         }
     }
-
-
     
 }

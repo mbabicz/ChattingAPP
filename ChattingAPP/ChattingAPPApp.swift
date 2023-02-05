@@ -18,14 +18,10 @@ struct ChattingAPPApp: App {
             let user = UserViewModel()
             let message = MessageViewModel()
 
-
             ContentView()
                 .environmentObject(message)
                 .environmentObject(user)
 
-
-            
-            
         }
     }
 }
