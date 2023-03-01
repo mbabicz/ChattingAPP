@@ -27,20 +27,16 @@ struct ContentView: View {
             else if user.userIsAuthenticatedAndSynced{
                 
                 TabView{
-                    
-                    ChatBotView().tabItem {
-                        Image("bot")
-                            .resizable()
+                    ChatsView().tabItem {
+                        Image(systemName: "text.bubble")
                     }.tag(0)
-                    
-                    GlobalChatView().tabItem {
-                        Image("global")
-                        
+                    SettingsView().tabItem {
+                        Image(systemName: "person")
                     }.tag(1)
                     
                 }.accentColor(.green)
                 
-                ChatBotView()
+//                ChatBotView()
 
             }
             else{

@@ -22,7 +22,6 @@ struct AuthenticationView: View {
             )
         }
     }
-    
 }
 
 struct SignInView: View {
@@ -60,7 +59,6 @@ struct SignInView: View {
                         } label: {
                             Image(systemName: self.isSecured ? "eye.slash" : "eye").accentColor(.gray)
                         }.padding()
-                        
                     }
                     
                     NavigationLink("Reset your password", destination: ResetPasswordView())

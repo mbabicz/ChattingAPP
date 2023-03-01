@@ -22,9 +22,19 @@ struct ChatBotView: View {
                         ForEach(models, id: \.self) { message in
                             HStack {
                                 if message.contains("Me: ") {
-                                    MessageView(message: message.replacingOccurrences(of: "Me: ", with: ""), isUserMessage: true, isBotMessage: false, isLastMessage: true)
+                                    MessageView(
+                                        message: message.replacingOccurrences(of: "Me: ", with: ""),
+                                        isUserMessage: true,
+                                        isBotMessage: false,
+                                        isLastMessage: true
+                                    )
                                 } else if message.contains("ChatBot: ") {
-                                    MessageView(message: message.replacingOccurrences(of: "ChatBot: ", with: "").trimmingCharacters(in: .whitespacesAndNewlines), isUserMessage: false, isBotMessage: true, isLastMessage: true)
+                                    MessageView(
+                                        message: message.replacingOccurrences(of: "ChatBot: ", with: "").trimmingCharacters(in: .whitespacesAndNewlines),
+                                        isUserMessage: false,
+                                        isBotMessage: true,
+                                        isLastMessage: true
+                                    )
                                 } else {
                                     LoadingIndicatorView()
                                     Spacer()
@@ -44,6 +54,7 @@ struct ChatBotView: View {
                             reader.scrollTo(bottomID)
                         }
                     }
+                    
                 }
                 Divider()
                 HStack(alignment: .top){
@@ -67,14 +78,12 @@ struct ChatBotView: View {
                 }
                 .padding(.top)
             }
-            
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarTitle("ChatBot")
         }
         .onAppear {
             botVM.setup()
         }
-        
     }
     
     func send() {
