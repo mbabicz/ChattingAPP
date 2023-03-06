@@ -15,7 +15,6 @@
 		29397E6C2981D06B0007F3D1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29397E6B2981D06B0007F3D1 /* Preview Assets.xcassets */; };
 		29397E742981D22C0007F3D1 /* OpenAISwift in Frameworks */ = {isa = PBXBuildFile; productRef = 29397E732981D22C0007F3D1 /* OpenAISwift */; };
 		29397E782981D4FE0007F3D1 /* GlobalChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29397E772981D4FE0007F3D1 /* GlobalChatView.swift */; };
-		29397E7E298282230007F3D1 /* Api-keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29397E7D298282230007F3D1 /* Api-keys.plist */; };
 		294572C5298AD49F007DDD78 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294572C4298AD49F007DDD78 /* UserViewModel.swift */; };
 		294572C7298AF978007DDD78 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 294572C6298AF978007DDD78 /* GoogleService-Info.plist */; };
 		294572C9298B0AF3007DDD78 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294572C8298B0AF3007DDD78 /* Message.swift */; };
@@ -40,7 +39,6 @@
 		29397E682981D06B0007F3D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29397E6B2981D06B0007F3D1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		29397E772981D4FE0007F3D1 /* GlobalChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalChatView.swift; sourceTree = "<group>"; };
-		29397E7D298282230007F3D1 /* Api-keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Api-keys.plist"; sourceTree = "<group>"; };
 		294572C4298AD49F007DDD78 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		294572C6298AF978007DDD78 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		294572C8298B0AF3007DDD78 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -116,7 +114,6 @@
 				29397E662981D0650007F3D1 /* ContentView.swift */,
 				29397E682981D06B0007F3D1 /* Assets.xcassets */,
 				29397E6A2981D06B0007F3D1 /* Preview Content */,
-				29397E7D298282230007F3D1 /* Api-keys.plist */,
 			);
 			path = ChattingAPP;
 			sourceTree = "<group>";
@@ -238,7 +235,6 @@
 			files = (
 				29397E6C2981D06B0007F3D1 /* Preview Assets.xcassets in Resources */,
 				294572C7298AF978007DDD78 /* GoogleService-Info.plist in Resources */,
-				29397E7E298282230007F3D1 /* Api-keys.plist in Resources */,
 				29397E692981D06B0007F3D1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,6 +15,10 @@ struct GlobalChatView: View {
     @Namespace var bottomID
     
     @State private var showSendButton = false
+    @State private var hasMessage = false
+    
+    @FocusState private var fieldIsFocused: Bool
+
     
     var body: some View {
         VStack{
@@ -42,15 +46,19 @@ struct GlobalChatView: View {
             
             HStack(alignment: .center) {
                 TextField("Message...", text: $typingMessage)
+                    .focused($fieldIsFocused)
                     .font(.callout)
                     .padding(10)
                     .lineLimit(3)
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
                     .background(Capsule().stroke(Color.gray, lineWidth: 1))
-                    .frame(width: typingMessage.isEmpty ? UIScreen.main.bounds.width : nil, height: 40)
+                    .frame(width: typingMessage.isEmpty ? UIScreen.main.bounds.width - 25 : nil, height: 40)
                     .animation(.easeOut(duration: 0.2))
-                    
+                    .onTapGesture {
+                        fieldIsFocused = true
+                    }
+
                 if !typingMessage.isEmpty {
                     Spacer()
                     Button(action: {
@@ -68,11 +76,16 @@ struct GlobalChatView: View {
                     .animation(.easeOut(duration: 0.2).delay(0.2))
                 }
             }
-            .padding([.leading, .bottom,])
+            .padding(.bottom, 10)          
+
             .onChange(of: typingMessage) { newValue in
                 withAnimation {
                     showSendButton = !newValue.isEmpty
                 }
+            }
+            
+            .onDisappear {
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -80,8 +93,14 @@ struct GlobalChatView: View {
         .onAppear{
             messageVM.getMessages()
         }
+        .gesture(TapGesture().onEnded {
+            hideKeyboard()
+        })
     }
-
+    
+    private func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 
     private func isLastMessage(for message: Message) -> Bool {
         guard let messages = messageVM.messages else { return true }
