@@ -22,10 +22,11 @@ struct SettingsView: View {
                     if let image = image {
                         image
                             .resizable()
-                            .frame(height: 150)
-                            .aspectRatio(contentMode: .fit)
-                            .clipShape(Circle())
                             .padding(.top)
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 150, height: 150)
+                            .clipShape(Circle())
+                        
                     } else {
                         ProfileImageView(imageURL: imageURL, width: 150, height: 150)
                             .padding(.top)
@@ -50,103 +51,27 @@ struct SettingsView: View {
                         .background(Color.green)
                         .cornerRadius(45)
                         .padding()
-
+                    
                 }
                 Spacer()
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarTitle("Settings")
             
-                    .toolbar{
-                        ToolbarItem(placement: .navigationBarTrailing){
-                            Button {
-                                userViewModel.signOut()
-                            } label: {
-                                Text("Log out")
-                                    .font(.headline)
-                                    .foregroundColor(.green)
-                            }
-                        }
-
+            .toolbar{
+                ToolbarItem(placement: .navigationBarTrailing){
+                    Button {
+                        userViewModel.signOut()
+                    } label: {
+                        Text("Log out")
+                            .font(.headline)
+                            .foregroundColor(.green)
                     }
+                }
+                
+            }
         }
 
-//            VStack{
-//                HStack{
-//                    Spacer()
-//                    if let user = user.user {
-//                        if let image = image {
-//                            image
-//                                .resizable()
-//                                .frame(height: 150)
-//                                .aspectRatio(contentMode: .fit)
-//                                .clipShape(Circle())
-//                        } else {
-//                            ProfileImageView(imageURL: user.imageURL, width: 150, height: 150)
-//                        }
-//                    }
-//                    Spacer()
-//                }
-//                Button {
-//                    showImagePicker = true
-//                } label: {
-//                    Text("Upload image")
-//                }
-//
-//                Divider()
-//                Toggle(
-//                    "Push notifications",
-//                    isOn: $notifactionsToggle
-//                )
-//                .toggleStyle(SwitchToggleStyle(tint: .green))
-//                .padding()
-//                .background(
-//                    Color(.gray)
-//                        .opacity(0.25)
-//                        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-//                )
-//                .padding()
-//                Button {
-//                    user.user?.pushNotifications = notifactionsToggle
-//                    if image != nil {
-//                        user.uploadUserImage(image: self.inputImage!)
-//                    }
-//                    user.update()
-//                } label: {
-//                    Text("Save")
-//                        .frame(width: 200, height: 50)
-//                        .bold()
-//                        .foregroundColor(.white)
-//                        .background(Color.green)
-//                        .cornerRadius(45)
-//                        .padding()
-//
-//                }
-//                Spacer()
-//            }
-//            Spacer()
-//
-//
-//        }
-////        .navigationBarTitleDisplayMode(.inline)
-////        .navigationBarTitle("ChatBot")
-//
-//        .toolbar{
-//            ToolbarItem(placement: .navigationBarTrailing){
-//                Button {
-//                    user.signOut()
-//                } label: {
-//                    Text("Log out")
-//                        .font(.headline)
-//                        .foregroundColor(.green)
-//                }
-//            }
-
-        //}
-
-//        .onAppear{
-//            notifactionsToggle = userViewModel.user!.pushNotifications ?? true
-//        }
         .sheet(isPresented: $showImagePicker){
             ImagePicker(image: $inputImage)
         }

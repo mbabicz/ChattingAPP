@@ -14,6 +14,7 @@ struct MessageView: View {
     var isLastMessage: Bool
     var userID: String?
     @State private var sentBy: User?
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         HStack(spacing: 0) {
@@ -36,7 +37,7 @@ struct MessageView: View {
                     Text(message)
                         .padding(10)
                         .font(.callout)
-                        .foregroundColor(isUserMessage ? .white : .black)
+                        .foregroundColor(isUserMessage ? .white : (colorScheme == .dark ? .white : .black))
                         .background(isUserMessage ? Color.green : Color.gray.opacity(0.25))
                         .cornerRadius(25)
                 }

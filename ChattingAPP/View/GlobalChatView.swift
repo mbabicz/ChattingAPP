@@ -13,12 +13,8 @@ struct GlobalChatView: View {
     @EnvironmentObject var user: UserViewModel
     @StateObject var messageVM = MessageViewModel()
     @Namespace var bottomID
-    
     @State private var showSendButton = false
-    @State private var hasMessage = false
-    
     @FocusState private var fieldIsFocused: Bool
-
     
     var body: some View {
         VStack{
@@ -41,7 +37,6 @@ struct GlobalChatView: View {
                     }
                 }
             }
-            Spacer()
             Divider()
             
             HStack(alignment: .center) {
@@ -53,7 +48,7 @@ struct GlobalChatView: View {
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
                     .background(Capsule().stroke(Color.gray, lineWidth: 1))
-                    .frame(width: typingMessage.isEmpty ? UIScreen.main.bounds.width - 25 : nil, height: 40)
+                    .frame(width: typingMessage.isEmpty ? UIScreen.main.bounds.width - 20 : nil, height: 40)
                     .animation(.easeOut(duration: 0.2))
                     .onTapGesture {
                         fieldIsFocused = true
@@ -62,8 +57,11 @@ struct GlobalChatView: View {
                 if !typingMessage.isEmpty {
                     Spacer()
                     Button(action: {
-                        messageVM.sendMessage(message: typingMessage)
-                        typingMessage = ""
+                        withAnimation(.easeOut(duration: 0.2)) {
+                            messageVM.sendMessage(message: typingMessage)
+                            typingMessage = ""
+                            showSendButton = false
+                        }
                     }) {
                         Image(systemName: "paperplane.fill")
                             .resizable()
@@ -73,10 +71,17 @@ struct GlobalChatView: View {
                             .padding(.trailing)
                     }
                     .opacity(showSendButton ? 1 : 0)
-                    .animation(.easeOut(duration: 0.2).delay(0.2))
+
+                    .onChange(of: typingMessage) { newValue in
+                        withAnimation {
+                            showSendButton = !newValue.isEmpty
+                        }
+                    }
+
                 }
             }
-            .padding(.bottom, 10)          
+            .padding([.bottom, .leading], 10)
+            .padding(.trailing, typingMessage.isEmpty ? 10 : 0)
 
             .onChange(of: typingMessage) { newValue in
                 withAnimation {

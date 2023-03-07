@@ -14,25 +14,16 @@ struct ProfileImageView: View {
     let height: CGFloat
     var body: some View {
         ZStack{
-            Rectangle()
-                .fill(Color.white)
-                .frame(width: self.width, height: self.height, alignment: .center)
-                .cornerRadius(12)
-                .overlay(
-                    ZStack {
-                        ProgressView()
-                        if imageLoader.image != nil {
-                            HStack {
-                                Spacer()
-                                Image(uiImage: imageLoader.image!)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .clipShape(Circle())
-                                Spacer()
-                            }
-                        }
-                    }
-                )
+            if imageLoader.image != nil {
+                Image(uiImage: imageLoader.image!)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: self.width, height: self.height, alignment: .center)
+                    .clipShape(Circle())
+            }
+            else {
+                ProgressView()
+            }
         }
         .onAppear {
             imageLoader.loadImage(with: imageURL)
