@@ -21,7 +21,7 @@ struct GlobalChatView: View {
             ScrollViewReader{ reader in
                 ScrollView {
                     ForEach(messageVM.messages?.sorted(by: { $0.sentDate < $1.sentDate }) ?? [], id: \.self) { message in
-                        MessageView(message: message.message, isUserMessage: message.userID == user.userID, isLastMessage: isLastMessage(for: message) ,userID: message.userID)
+                        MessageView(message: message)
                             .id(message.id)
                     }
                     Text("").id(bottomID)
@@ -107,11 +107,11 @@ struct GlobalChatView: View {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 
-    private func isLastMessage(for message: Message) -> Bool {
-        guard let messages = messageVM.messages else { return true }
-        guard let index = messages.firstIndex(where: { $0.id == message.id }) else { return true }
-        return index == messages.count - 1
-    }
+//    private func isLastMessage(for message: Message) -> Bool {
+//        guard let messages = messageVM.messages else { return true }
+//        guard let index = messages.firstIndex(where: { $0.id == message.id }) else { return true }
+//        return index == messages.count - 1
+//    }
 }
 
 struct GlobalChat_Previews: PreviewProvider {
