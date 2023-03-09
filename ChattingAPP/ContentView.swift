@@ -35,9 +35,6 @@ struct ContentView: View {
                     }.tag(1)
                     
                 }.accentColor(.green)
-                
-//                ChatBotView()
-
             }
             else{
                 AuthenticationView()

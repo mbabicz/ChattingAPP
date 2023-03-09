@@ -12,8 +12,8 @@ struct MessageView: View {
     var message: Message
     @State private var sentBy: User?
     @Environment(\.colorScheme) var colorScheme
-    @State private var isUserMessage: Bool
-    
+    @State private var isUserMessage: Bool = false
+
     var body: some View {
         HStack(spacing: 0) {
             if isUserMessage {
@@ -38,30 +38,18 @@ struct MessageView: View {
                         .foregroundColor(isUserMessage ? .white : (colorScheme == .dark ? .white : .black))
                         .background(isUserMessage ? Color.green : Color.gray.opacity(0.25))
                         .cornerRadius(25)
-                        .border(.red)
                 }
             }
-            .border(.blue)
-            
-            if isUserMessage {
+            if !isUserMessage {
                 Spacer()
             }
         }
-        .padding(.leading, 10)
-        .padding(.trailing, 10)
-
         .onAppear{
             let userID = message.userID
-            if userID != nil {
                 user.getUserByUID(userID: userID) { user in
                     self.sentBy = user
                 }
-            }
-            if user.userID == message.userID {
-                isUserMessage = true
-            } else {
-                isUserMessage = false
-            }
+            isUserMessage = user.userID == userID
         }
     }
 }

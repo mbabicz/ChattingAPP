@@ -7,6 +7,12 @@
 
 import Foundation
 
+//enum MessageType {
+//    case text
+//    case image
+//    case indicator
+//}
+
 struct Message: Codable, Hashable {
     
     var id: String

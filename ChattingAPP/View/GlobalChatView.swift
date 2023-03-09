@@ -17,14 +17,16 @@ struct GlobalChatView: View {
     @FocusState private var fieldIsFocused: Bool
     
     var body: some View {
-        VStack{
+        VStack(spacing: 0){
             ScrollViewReader{ reader in
                 ScrollView {
                     ForEach(messageVM.messages?.sorted(by: { $0.sentDate < $1.sentDate }) ?? [], id: \.self) { message in
                         MessageView(message: message)
                             .id(message.id)
                     }
+                    .padding(.vertical, -3)
                     Text("").id(bottomID)
+
                 }
                 .onAppear{
                     withAnimation{
@@ -106,12 +108,6 @@ struct GlobalChatView: View {
     private func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
-
-//    private func isLastMessage(for message: Message) -> Bool {
-//        guard let messages = messageVM.messages else { return true }
-//        guard let index = messages.firstIndex(where: { $0.id == message.id }) else { return true }
-//        return index == messages.count - 1
-//    }
 }
 
 struct GlobalChat_Previews: PreviewProvider {
