@@ -10,11 +10,17 @@ import SwiftUI
 struct GlobalChatView: View {
     
     @State var typingMessage: String = ""
-    @EnvironmentObject var user: UserViewModel
+    //@EnvironmentObject var user: UserViewModel
     @StateObject var messageVM = MessageViewModel()
     @Namespace var bottomID
     @State private var showSendButton = false
     @FocusState private var fieldIsFocused: Bool
+    
+    @State private var inputImage: UIImage?
+    @State private var showImagePicker = false
+    
+    @State private var showImageButtons = true
+
     
     var body: some View {
         VStack(spacing: 0){
@@ -40,8 +46,46 @@ struct GlobalChatView: View {
                 }
             }
             Divider()
+                .padding(.bottom, 10)
             
             HStack(alignment: .center) {
+                if showImageButtons {
+                    Button(action: {
+                        showImagePicker = true
+                    }) {
+                        Image(systemName: "camera")
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundColor(.gray)
+                            .frame(width: 25, height: 25)
+                            .padding(.trailing, 10)
+                    }
+                    Button(action: {
+                        showImagePicker = true
+                    }) {
+                        Image(systemName: "photo")
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundColor(.gray)
+                            .frame(width: 25, height: 25)
+                            .padding(.trailing, 10)
+                    }
+                } else {
+                    Button(action: {
+                        withAnimation(.easeOut(duration: 0.2)) {
+                            showImageButtons = true
+                        }
+                    }) {
+                        Image(systemName: "greaterthan")
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundColor(.gray)
+                            .frame(width: 20, height: 20)
+                            .padding(.trailing, 10)
+                    }
+                }
+
+
                 TextField("Message...", text: $typingMessage)
                     .focused($fieldIsFocused)
                     .font(.callout)
@@ -50,10 +94,12 @@ struct GlobalChatView: View {
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
                     .background(Capsule().stroke(Color.gray, lineWidth: 1))
-                    .frame(width: typingMessage.isEmpty ? UIScreen.main.bounds.width - 20 : nil, height: 40)
+                    .frame(width: typingMessage.isEmpty ? UIScreen.main.bounds.width - 100 : nil, height: 40)
                     .animation(.easeOut(duration: 0.2))
                     .onTapGesture {
-                        fieldIsFocused = true
+                        withAnimation {
+                            fieldIsFocused = true
+                        }
                     }
 
                 if !typingMessage.isEmpty {
@@ -69,17 +115,10 @@ struct GlobalChatView: View {
                             .resizable()
                             .scaledToFit()
                             .foregroundColor(.green)
-                            .frame(width: 30, height: 30)
+                            .frame(width: 25, height: 25)
                             .padding(.trailing)
                     }
                     .opacity(showSendButton ? 1 : 0)
-
-                    .onChange(of: typingMessage) { newValue in
-                        withAnimation {
-                            showSendButton = !newValue.isEmpty
-                        }
-                    }
-
                 }
             }
             .padding([.bottom, .leading], 10)
@@ -88,6 +127,7 @@ struct GlobalChatView: View {
             .onChange(of: typingMessage) { newValue in
                 withAnimation {
                     showSendButton = !newValue.isEmpty
+                    showImageButtons = newValue.isEmpty
                 }
             }
             
@@ -103,6 +143,9 @@ struct GlobalChatView: View {
         .gesture(TapGesture().onEnded {
             hideKeyboard()
         })
+        .sheet(isPresented: $showImagePicker){
+            ImagePicker(image: $inputImage)
+        }
     }
     
     private func hideKeyboard() {
