@@ -27,7 +27,7 @@ struct ContentView: View {
             else if user.userIsAuthenticatedAndSynced{
                 
                 TabView{
-                    ChatsView().tabItem {
+                    GlobalChatView().tabItem {
                         Image(systemName: "text.bubble")
                     }.tag(0)
                     SettingsView().tabItem {

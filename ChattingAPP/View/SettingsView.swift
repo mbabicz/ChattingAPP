@@ -15,6 +15,10 @@ struct SettingsView: View {
     @State private var inputImage: UIImage?
     @State private var image: Image?
     
+    
+    @State private var showingImagePicker = false
+    @State private var selectedImage: UIImage?
+    
     var body: some View {
         NavigationView {
             VStack {

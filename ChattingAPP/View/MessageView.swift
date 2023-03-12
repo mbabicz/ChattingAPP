@@ -29,8 +29,7 @@ struct MessageView: View {
                     if !isUserMessage, let sentBy = sentBy {
                         Text(sentBy.username)
                             .font(.footnote)
-                            .foregroundColor(.black.opacity(0.5))
-                            .padding(.leading, 10)
+                            .foregroundColor(colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5))
                     }
                     Text(message.message)
                         .padding(10)
@@ -40,6 +39,7 @@ struct MessageView: View {
                         .cornerRadius(25)
                 }
             }
+            .padding(.trailing, 10)
             if !isUserMessage {
                 Spacer()
             }
