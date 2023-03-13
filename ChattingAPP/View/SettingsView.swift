@@ -72,7 +72,6 @@ struct SettingsView: View {
                             .foregroundColor(.green)
                     }
                 }
-                
             }
         }
 

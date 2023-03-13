@@ -17,6 +17,7 @@ struct GlobalChatView: View {
     
     @State private var inputImage: UIImage?
     @State private var showImagePicker = false
+    @State private var showCameraLoader = false
     @State private var showImageButtons = true
 
     var body: some View {
@@ -27,6 +28,7 @@ struct GlobalChatView: View {
                         ForEach(messageVM.messages?.sorted(by: { $0.sentDate < $1.sentDate }) ?? [], id: \.self) { message in
                             MessageView(message: message)
                                 .id(message.id)
+
                         }
                         .padding(.vertical, -3)
                         Text("").id(bottomID)
@@ -49,7 +51,7 @@ struct GlobalChatView: View {
                 HStack(alignment: .center) {
                     if showImageButtons && inputImage == nil{
                         Button(action: {
-                            showImagePicker = true
+                            showCameraLoader = true
                         }) {
                             Image(systemName: "camera")
                                 .resizable()
@@ -83,27 +85,30 @@ struct GlobalChatView: View {
                     }
                     if inputImage != nil {
                         HStack(alignment: .center) {
-                            Image(uiImage: inputImage ?? UIImage(systemName: "photo")!)
+                            Image(uiImage: inputImage!)
                                 .resizable()
                                 .scaledToFit()
+                                .frame(height: 140)
                                 .padding(.vertical, 10)
-                                .frame(maxHeight: 140)
                                 .cornerRadius(10)
                                 .overlay(
-                                    Button(action: {
-                                        withAnimation {
-                                            inputImage = nil
+                                    HStack(alignment: .top){
+                                        Spacer()
+                                        VStack{
+                                            Button(action: {
+                                                withAnimation {
+                                                    inputImage = nil
+                                                }
+                                            }, label: {
+                                                Image(systemName: "xmark.circle")
+                                                    .foregroundColor(.white)
+                                                    .background(Color.black.opacity(0.7))
+                                                    .clipShape(Circle())
+                                                    .padding(.top, 10)
+                                            })
+                                            Spacer()
                                         }
-                                    }, label: {
-                                        Image(systemName: "xmark.circle")
-                                            .foregroundColor(.white)
-                                            .background(Color.black.opacity(0.7))
-                                            .clipShape(Circle())
-                                            .padding(10)
                                     })
-                                    .padding(.trailing, 10)
-                                    .offset(x: 25, y:-50)
-                                )
                             Spacer()
                         }
                         .padding(.horizontal, 10)
@@ -176,6 +181,9 @@ struct GlobalChatView: View {
             .sheet(isPresented: $showImagePicker){
                 ImagePicker(image: $inputImage)
                     .presentationDetents([.fraction(0.5)])
+            }
+            .sheet(isPresented: $showCameraLoader){
+                CameraLoader(image: $inputImage)
             }
         }
     }
