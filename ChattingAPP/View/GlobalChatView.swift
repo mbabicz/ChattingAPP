@@ -19,6 +19,8 @@ struct GlobalChatView: View {
     @State private var showImagePicker = false
     @State private var showCameraLoader = false
     @State private var showImageButtons = true
+    
+    
 
     var body: some View {
         NavigationView{
@@ -46,7 +48,7 @@ struct GlobalChatView: View {
                     }
                 }
                 Divider()
-                    .padding(.bottom, 10)
+                    .padding(.bottom, inputImage != nil ? 10 : 0)
                 
                 HStack(alignment: .center) {
                     if showImageButtons && inputImage == nil{
@@ -58,7 +60,7 @@ struct GlobalChatView: View {
                                 .scaledToFit()
                                 .foregroundColor(.gray)
                                 .frame(width: 25, height: 25)
-                                .padding(.trailing, 10)
+                                .padding(.horizontal, 10)
                         }
                         Button(action: {
                             showImagePicker = true
@@ -81,15 +83,16 @@ struct GlobalChatView: View {
                                 .scaledToFit()
                                 .foregroundColor(.gray)
                                 .frame(width: 20, height: 20)
+                                .padding(.leading, 10)
                         }
                     }
                     if inputImage != nil {
-                        HStack(alignment: .center) {
+                        HStack(alignment: .top){
                             Image(uiImage: inputImage!)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: 140)
-                                .padding(.vertical, 10)
+                                .padding([.top, .leading, .bottom], 10)
                                 .cornerRadius(10)
                                 .overlay(
                                     HStack(alignment: .top){
@@ -109,9 +112,18 @@ struct GlobalChatView: View {
                                             Spacer()
                                         }
                                     })
-                            Spacer()
+                                
+                                TextField("Message...", text: $typingMessage, axis: .vertical)
+                                    .focused($fieldIsFocused)
+                                    .font(.callout)
+                                    .padding(10)
+                                    .disableAutocorrection(true)
+                                    .autocapitalization(.none)
+                                    .border(.red)
+
+
+                            
                         }
-                        .padding(.horizontal, 10)
                         .background(
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(Color.gray, lineWidth: 1)
@@ -120,15 +132,16 @@ struct GlobalChatView: View {
                         .frame(maxWidth: .infinity)
                         .animation(.easeInOut(duration: 0.5))
                     } else {
-                        TextField("Message...", text: $typingMessage)
+                        TextField("Message...", text: $typingMessage, axis: .vertical)
                             .focused($fieldIsFocused)
+                            .textFieldStyle(.plain)
                             .font(.callout)
                             .padding(10)
                             .lineLimit(3)
                             .disableAutocorrection(true)
                             .autocapitalization(.none)
                             .background(Capsule().stroke(Color.gray, lineWidth: 1))
-                            .frame(width: typingMessage.isEmpty ? UIScreen.main.bounds.width - 100 : nil, height: 40)
+                            .frame(width: typingMessage.isEmpty ? UIScreen.main.bounds.width - 100 : nil)
                             .animation(.easeOut(duration: 0.5))
                             .onTapGesture {
                                 withAnimation {
@@ -156,7 +169,9 @@ struct GlobalChatView: View {
                         .opacity(showSendButton ? 1 : (inputImage != nil ? 1 : 0))
                     }
                 }
-                .padding([.bottom, .leading], 10)
+                .padding(.bottom, 20)
+                .padding(.top, 10)
+
                 .padding(.trailing, typingMessage.isEmpty ? 10 : 0)
                 
                 .onChange(of: typingMessage) { newValue in

@@ -44,6 +44,7 @@ struct MessageView: View {
                 Spacer()
             }
         }
+        .padding(.leading, 10)
         .onAppear{
             let userID = message.userID
                 user.getUserByUID(userID: userID) { user in
