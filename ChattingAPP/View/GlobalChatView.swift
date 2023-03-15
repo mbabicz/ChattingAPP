@@ -19,8 +19,6 @@ struct GlobalChatView: View {
     @State private var showImagePicker = false
     @State private var showCameraLoader = false
     @State private var showImageButtons = true
-    
-    
 
     var body: some View {
         NavigationView{
@@ -30,18 +28,18 @@ struct GlobalChatView: View {
                         ForEach(messageVM.messages?.sorted(by: { $0.sentDate < $1.sentDate }) ?? [], id: \.self) { message in
                             MessageView(message: message)
                                 .id(message.id)
-
                         }
                         .padding(.vertical, -3)
                         Text("").id(bottomID)
-                        
                     }
                     .onAppear{
-                        withAnimation{
-                            reader.scrollTo(bottomID)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                            withAnimation{
+                                reader.scrollTo(bottomID)
+                            }
                         }
                     }
-                    .onChange(of: messageVM.messages?.count){ _ in
+                    .onChange(of: messageVM.messages){ _ in
                         withAnimation{
                             reader.scrollTo(bottomID)
                         }
@@ -74,7 +72,7 @@ struct GlobalChatView: View {
                         }
                     } else if inputImage == nil {
                         Button(action: {
-                            withAnimation(.easeOut(duration: 0.5)) {
+                            withAnimation {
                                 showImageButtons = true
                             }
                         }) {
@@ -85,7 +83,16 @@ struct GlobalChatView: View {
                                 .frame(width: 20, height: 20)
                                 .padding(.leading, 10)
                         }
+                        .opacity(showImageButtons ? 0 : 1)
+                        .animation(.easeInOut(duration: 0.2))
+                        .onChange(of: typingMessage) { newValue in
+                            withAnimation(.easeInOut(duration: 0.2)) {
+                                showImageButtons = newValue.isEmpty
+                            }
+                        }
                     }
+ 
+                    
                     if inputImage != nil {
                         HStack(alignment: .top){
                             Image(uiImage: inputImage!)
@@ -112,17 +119,14 @@ struct GlobalChatView: View {
                                             Spacer()
                                         }
                                     })
-                                
-                                TextField("Message...", text: $typingMessage, axis: .vertical)
-                                    .focused($fieldIsFocused)
-                                    .font(.callout)
-                                    .padding(10)
-                                    .disableAutocorrection(true)
-                                    .autocapitalization(.none)
-                                    .border(.red)
-
-
                             
+                            TextField("Message...", text: $typingMessage, axis: .vertical)
+                                .focused($fieldIsFocused)
+                                .font(.callout)
+                                .padding(10)
+                                .disableAutocorrection(true)
+                                .autocapitalization(.none)
+                                .border(.red)
                         }
                         .background(
                             RoundedRectangle(cornerRadius: 10)
@@ -130,7 +134,6 @@ struct GlobalChatView: View {
                         )
                         .frame(height: 160)
                         .frame(maxWidth: .infinity)
-                        .animation(.easeInOut(duration: 0.5))
                     } else {
                         TextField("Message...", text: $typingMessage, axis: .vertical)
                             .focused($fieldIsFocused)
@@ -141,20 +144,19 @@ struct GlobalChatView: View {
                             .disableAutocorrection(true)
                             .autocapitalization(.none)
                             .background(Capsule().stroke(Color.gray, lineWidth: 1))
-                            .frame(width: typingMessage.isEmpty ? UIScreen.main.bounds.width - 100 : nil)
-                            .animation(.easeOut(duration: 0.5))
+                            .frame(width: !typingMessage.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? UIScreen.main.bounds.width - 100 : nil)
+                            .animation(.easeInOut(duration: 0.2), value: typingMessage.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                             .onTapGesture {
-                                withAnimation {
-                                    fieldIsFocused = true
-                                }
+                                fieldIsFocused = true
                             }
                     }
                     
-                    if !typingMessage.isEmpty || inputImage != nil{
+                    if !typingMessage.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty{
                         Spacer()
                         Button(action: {
-                            withAnimation(.easeOut(duration: 0.2)) {
-                                messageVM.sendMessage(message: typingMessage, image: inputImage)
+                            withAnimation{
+                                let trimmedMessage = typingMessage.trimmingCharacters(in: .whitespaces)
+                                messageVM.sendMessage(message: trimmedMessage, image: inputImage)
                                 typingMessage = ""
                                 inputImage = nil
                                 showSendButton = false
@@ -173,13 +175,13 @@ struct GlobalChatView: View {
                 .padding(.bottom, 20)
                 .padding(.top, 10)
 
-                .padding(.trailing, typingMessage.isEmpty ? 10 : 0)
+                .padding(.trailing, typingMessage.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? 10 : 0)
                 
                 .onChange(of: typingMessage) { newValue in
-                    withAnimation {
+                    withAnimation(.easeInOut) {
                         showSendButton = !newValue.isEmpty
                         showImageButtons = newValue.isEmpty
-                    }
+                   }
                 }
                 .onDisappear {
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)

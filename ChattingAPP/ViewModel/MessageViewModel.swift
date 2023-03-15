@@ -50,7 +50,6 @@ class MessageViewModel: ObservableObject {
             }
         } else {
             self.saveMessageToDatabase(message: message, imageURL: nil)
-
         }
     }
     
