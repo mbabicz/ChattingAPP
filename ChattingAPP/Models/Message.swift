@@ -18,6 +18,7 @@ struct Message: Codable, Hashable {
     var id: String
     var userID: String
     var sentDate: Date
-    var message: String
+    var message: String?
+    var imageURL: String?
     
 }

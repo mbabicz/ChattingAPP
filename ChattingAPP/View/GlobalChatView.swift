@@ -154,8 +154,9 @@ struct GlobalChatView: View {
                         Spacer()
                         Button(action: {
                             withAnimation(.easeOut(duration: 0.2)) {
-                                messageVM.sendMessage(message: typingMessage)
+                                messageVM.sendMessage(message: typingMessage, image: inputImage)
                                 typingMessage = ""
+                                inputImage = nil
                                 showSendButton = false
                             }
                         }) {

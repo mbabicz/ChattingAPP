@@ -13,6 +13,7 @@ struct MessageView: View {
     @State private var sentBy: User?
     @Environment(\.colorScheme) var colorScheme
     @State private var isUserMessage: Bool = false
+    @StateObject private var imageLoader = ImageLoader()
 
     var body: some View {
         HStack(spacing: 0) {
@@ -25,18 +26,30 @@ struct MessageView: View {
                         .padding(.top, 20)
                         .padding(.trailing, 5)
                 }
-                VStack(alignment: .leading,spacing: 0){
+                VStack(alignment: .trailing,spacing: 0){
                     if !isUserMessage, let sentBy = sentBy {
                         Text(sentBy.username)
                             .font(.footnote)
                             .foregroundColor(colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5))
                     }
-                    Text(message.message)
-                        .padding(10)
-                        .font(.callout)
-                        .foregroundColor(isUserMessage ? .white : (colorScheme == .dark ? .white : .black))
-                        .background(isUserMessage ? Color.green : Color.gray.opacity(0.25))
-                        .cornerRadius(25)
+                    if message.imageURL != nil {
+                        if imageLoader.image != nil {
+                            Image(uiImage: imageLoader.image!)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 300)
+                                .padding([.top, .leading, .bottom], 10)
+                                .cornerRadius(10)
+                        }
+                    }
+                    if message.message != nil && message.message != "" {
+                        Text(message.message!)
+                            .padding(10)
+                            .font(.callout)
+                            .foregroundColor(isUserMessage ? .white : (colorScheme == .dark ? .white : .black))
+                            .background(isUserMessage ? Color.green : Color.gray.opacity(0.25))
+                            .cornerRadius(25)
+                    }
                 }
             }
             .padding(.trailing, 10)
@@ -47,10 +60,13 @@ struct MessageView: View {
         .padding(.leading, 10)
         .onAppear{
             let userID = message.userID
-                user.getUserByUID(userID: userID) { user in
-                    self.sentBy = user
-                }
+            user.getUserByUID(userID: userID) { user in
+                self.sentBy = user
+            }
             isUserMessage = user.userID == userID
+            if message.imageURL != nil {
+                imageLoader.loadImage(with: URL(string: message.imageURL!)!)
+            }
         }
     }
 }
