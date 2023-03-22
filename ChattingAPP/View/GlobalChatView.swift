@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Introspect
 
 struct GlobalChatView: View {
     
@@ -19,30 +20,58 @@ struct GlobalChatView: View {
     @State private var showImagePicker = false
     @State private var showCameraLoader = false
     @State private var showImageButtons = true
+    
+    @State private var showScrollButton = false
+
 
     var body: some View {
         NavigationView{
             VStack(spacing: 0){
-                ScrollViewReader{ reader in
-                    ScrollView {
-                        ForEach(messageVM.messages?.sorted(by: { $0.sentDate < $1.sentDate }) ?? [], id: \.self) { message in
-                            MessageView(message: message)
-                                .id(message.id)
+                ZStack(alignment: .bottom){
+                    ScrollViewReader{ reader in
+                        ScrollView {
+                            ForEach(messageVM.messages?.sorted(by: { $0.sentDate < $1.sentDate }) ?? [], id: \.self) { message in
+                                MessageView(message: message)
+                                    .id(message.id)
+                            }
+                            .padding(.vertical, -3)
+                            Text("").id(bottomID)
                         }
-                        .padding(.vertical, -3)
-                        Text("").id(bottomID)
-                    }
-                    .onAppear{
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        .onChange(of: messageVM.messages){ _ in
                             withAnimation{
                                 reader.scrollTo(bottomID)
                             }
                         }
-                    }
-                    .onChange(of: messageVM.messages){ _ in
-                        withAnimation{
-                            reader.scrollTo(bottomID)
+                        .onChange(of: fieldIsFocused){ _ in
+                            //DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                            withAnimation{
+                                reader.scrollTo(bottomID)
+                            }
+                            //}
                         }
+                        .onAppear{
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                withAnimation{
+                                    reader.scrollTo(bottomID)
+                                }
+                            }
+                        }
+                        
+                    }
+                    if showScrollButton{
+                        Button {
+                            withAnimation{
+                                //shouldScroll = true
+                            }
+                        } label: {
+                            Image(systemName: "arrow.down.circle.fill")
+                                .resizable()
+                                .frame(width: 35, height: 35)
+                                .background(.white.opacity(0.5))
+                                .foregroundColor(Color.black.opacity(0.5))
+                                .clipShape(Circle())
+                        }
+                        .padding(.bottom, 20)
                     }
                 }
                 Divider()

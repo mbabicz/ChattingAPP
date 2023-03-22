@@ -21,36 +21,39 @@ struct MessageView: View {
                 Spacer()
             }
             HStack(alignment: .top, spacing: 0){
+                //Spacer()
                 if !isUserMessage, let sentBy = sentBy {
                     ProfileImageView(imageURL: sentBy.imageURL, width: 30, height: 30)
                         .padding(.top, 20)
                         .padding(.trailing, 5)
                 }
-                VStack(alignment: .trailing,spacing: 0){
+                VStack(alignment: .leading,spacing: 0){
                     if !isUserMessage, let sentBy = sentBy {
                         Text(sentBy.username)
                             .font(.footnote)
                             .foregroundColor(colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5))
                     }
-                    if message.imageURL != nil {
-                        if imageLoader.image != nil {
-                            Image(uiImage: imageLoader.image!)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: 300)
-                                .padding([.top, .leading, .bottom], 10)
-                                .cornerRadius(10)
+                    VStack(alignment: isUserMessage ? .trailing: .leading){
+                        if message.imageURL != nil {
+                            if imageLoader.image != nil {
+                                Image(uiImage: imageLoader.image!)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height: 300)
+                                    .cornerRadius(10)
+                            }
+                        }
+                        if message.message != nil && message.message != "" {
+                            Text(message.message!)
+                                .padding(10)
+                                .font(.callout)
+                                .foregroundColor(isUserMessage ? .white : (colorScheme == .dark ? .white : .black))
+                                .background(isUserMessage ? Color.green : Color.gray.opacity(0.25))
+                                .cornerRadius(25)
                         }
                     }
-                    if message.message != nil && message.message != "" {
-                        Text(message.message!)
-                            .padding(10)
-                            .font(.callout)
-                            .foregroundColor(isUserMessage ? .white : (colorScheme == .dark ? .white : .black))
-                            .background(isUserMessage ? Color.green : Color.gray.opacity(0.25))
-                            .cornerRadius(25)
-                    }
                 }
+                //Spacer()
             }
             .padding(.trailing, 10)
             if !isUserMessage {

@@ -78,10 +78,10 @@ class MessageViewModel: ObservableObject {
     
     func getMessages() {
         let ref = db.collection("Messages")
-        
+
         ref.addSnapshotListener { [weak self] querySnapshot, error in
             guard let self = self else { return }
-            
+
             if let snapshot = querySnapshot, error == nil {
                 self.messages = snapshot.documents.compactMap { doc -> Message? in
                     let id = doc.documentID
@@ -90,7 +90,7 @@ class MessageViewModel: ObservableObject {
                     let imageURL = doc["imageURL"] as? String
 
                     let userID = doc["userID"] as? String ?? ""
-                    
+
                     switch (doc["message"], doc["imageURL"]) {
                      case let (message as String, imageURL as String):
                          return Message(id: id, userID: userID, sentDate: date, message: message, imageURL: imageURL)
@@ -105,4 +105,5 @@ class MessageViewModel: ObservableObject {
             }
         }
     }
+
 }

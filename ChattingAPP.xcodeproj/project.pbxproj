@@ -23,6 +23,7 @@
 		2950D53B298C3C65007F0657 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950D53A298C3C65007F0657 /* SettingsView.swift */; };
 		2991A53F29A01A5F0010BD5F /* MessageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2991A53E29A01A5F0010BD5F /* MessageCard.swift */; };
 		29CCEDF429BFCF5800452C0D /* CameraLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCEDF329BFCF5800452C0D /* CameraLoader.swift */; };
+		29CCEDF729C3188800452C0D /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 29CCEDF629C3188800452C0D /* Introspect */; };
 		29F8D1AC298EC4BE00AF256A /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F8D1AB298EC4BE00AF256A /* ImageLoader.swift */; };
 		29F8D1AE298EC6AA00AF256A /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F8D1AD298EC6AA00AF256A /* ProfileImageView.swift */; };
 		86A290A99E3BD14B83CFD3E9 /* Pods_ChattingAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2090FA6A96386A6E9A69F4A0 /* Pods_ChattingAPP.framework */; };
@@ -59,6 +60,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86A290A99E3BD14B83CFD3E9 /* Pods_ChattingAPP.framework in Frameworks */,
+				29CCEDF729C3188800452C0D /* Introspect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +186,7 @@
 			);
 			name = ChattingAPP;
 			packageProductDependencies = (
+				29CCEDF629C3188800452C0D /* Introspect */,
 			);
 			productName = ChattingAPP;
 			productReference = 29397E612981D0650007F3D1 /* ChattingAPP.app */;
@@ -214,6 +217,7 @@
 			);
 			mainGroup = 29397E582981D0650007F3D1;
 			packageReferences = (
+				29CCEDF529C3188800452C0D /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 29397E622981D0650007F3D1 /* Products */;
 			projectDirPath = "";
@@ -503,6 +507,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		29CCEDF529C3188800452C0D /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		29CCEDF629C3188800452C0D /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29CCEDF529C3188800452C0D /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 29397E592981D0650007F3D1 /* Project object */;
 }
