@@ -36,11 +36,13 @@ struct MessageView: View {
                     VStack(alignment: isUserMessage ? .trailing: .leading){
                         if message.imageURL != nil {
                             if imageLoader.image != nil {
-                                Image(uiImage: imageLoader.image!)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(height: 300)
-                                    .cornerRadius(10)
+                                NavigationLink(destination: ImageViewerView(image: imageLoader.image!)) {
+                                    Image(uiImage: imageLoader.image!)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(height: 300)
+                                        .cornerRadius(10)
+                                }
                             }
                         }
                         if message.message != nil && message.message != "" {

@@ -21,6 +21,7 @@
 		294572CB298B0B02007DDD78 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294572CA298B0B02007DDD78 /* MessageViewModel.swift */; };
 		2950D539298C0171007F0657 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950D538298C0171007F0657 /* MessageView.swift */; };
 		2950D53B298C3C65007F0657 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950D53A298C3C65007F0657 /* SettingsView.swift */; };
+		2987F0FF29CE4A3500D581CD /* ImageViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2987F0FE29CE4A3500D581CD /* ImageViewerView.swift */; };
 		2991A53F29A01A5F0010BD5F /* MessageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2991A53E29A01A5F0010BD5F /* MessageCard.swift */; };
 		29CCEDF429BFCF5800452C0D /* CameraLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCEDF329BFCF5800452C0D /* CameraLoader.swift */; };
 		29CCEDF729C3188800452C0D /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 29CCEDF629C3188800452C0D /* Introspect */; };
@@ -46,6 +47,7 @@
 		294572CA298B0B02007DDD78 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		2950D538298C0171007F0657 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		2950D53A298C3C65007F0657 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2987F0FE29CE4A3500D581CD /* ImageViewerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerView.swift; sourceTree = "<group>"; };
 		2991A53E29A01A5F0010BD5F /* MessageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCard.swift; sourceTree = "<group>"; };
 		29CCEDF329BFCF5800452C0D /* CameraLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraLoader.swift; sourceTree = "<group>"; };
 		29F8D1AB298EC4BE00AF256A /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				2950D53A298C3C65007F0657 /* SettingsView.swift */,
 				29F8D1AD298EC6AA00AF256A /* ProfileImageView.swift */,
 				2991A53E29A01A5F0010BD5F /* MessageCard.swift */,
+				2987F0FE29CE4A3500D581CD /* ImageViewerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2987F0FF29CE4A3500D581CD /* ImageViewerView.swift in Sources */,
 				29397E782981D4FE0007F3D1 /* GlobalChatView.swift in Sources */,
 				294572C5298AD49F007DDD78 /* UserViewModel.swift in Sources */,
 				294572CB298B0B02007DDD78 /* MessageViewModel.swift in Sources */,
@@ -446,7 +450,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = mbabicz.ChattingAPP;
+				PRODUCT_BUNDLE_IDENTIFIER = mbabicz.ChattingAPP1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -477,7 +481,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = mbabicz.ChattingAPP;
+				PRODUCT_BUNDLE_IDENTIFIER = mbabicz.ChattingAPP1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

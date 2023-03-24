@@ -180,7 +180,7 @@ struct GlobalChatView: View {
                             }
                     }
                     
-                    if !typingMessage.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty{
+                    if !typingMessage.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || inputImage != nil{
                         Spacer()
                         Button(action: {
                             withAnimation{
