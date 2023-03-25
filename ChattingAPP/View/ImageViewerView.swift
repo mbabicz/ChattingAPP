@@ -32,8 +32,14 @@ struct ImageViewerView: View {
 
         let pinchToZoom = magnificationGesture.simultaneously(with: TapGesture(count: 2).onEnded({
             withAnimation {
-                self.scale = 1.0
-                self.lastScaleValue = 1.0
+                if scale != 1.0 {
+                    self.scale = 1.0
+                    self.lastScaleValue = 1.0
+                    
+                } else {
+                    self.scale = 3.0
+                    self.lastScaleValue = 3.0
+                }
             }
         }))
 
