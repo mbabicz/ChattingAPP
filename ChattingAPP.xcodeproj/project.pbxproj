@@ -27,7 +27,10 @@
 		2987F10B29CF9A1600D581CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2987F10A29CF9A1600D581CD /* Assets.xcassets */; };
 		2987F10E29CF9A1600D581CD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2987F10D29CF9A1600D581CD /* Preview Assets.xcassets */; };
 		2987F11429CF9CAB00D581CD /* GlobalChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2987F11329CF9CAB00D581CD /* GlobalChatView.swift */; };
-		2991A53F29A01A5F0010BD5F /* MessageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2991A53E29A01A5F0010BD5F /* MessageCard.swift */; };
+		2987F18129D23A4A00D581CD /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294572C4298AD49F007DDD78 /* UserViewModel.swift */; };
+		2987F18229D23A4C00D581CD /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294572CA298B0B02007DDD78 /* MessageViewModel.swift */; };
+		2987F18329D23A7500D581CD /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294572C8298B0AF3007DDD78 /* Message.swift */; };
+		2987F18429D23A7800D581CD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29202A91298915EE009FD057 /* User.swift */; };
 		29CCEDF429BFCF5800452C0D /* CameraLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CCEDF329BFCF5800452C0D /* CameraLoader.swift */; };
 		29CCEDF729C3188800452C0D /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 29CCEDF629C3188800452C0D /* Introspect */; };
 		29F8D1AC298EC4BE00AF256A /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F8D1AB298EC4BE00AF256A /* ImageLoader.swift */; };
@@ -60,7 +63,6 @@
 		2987F10D29CF9A1600D581CD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2987F10F29CF9A1600D581CD /* ChatingAPP_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChatingAPP_macOS.entitlements; sourceTree = "<group>"; };
 		2987F11329CF9CAB00D581CD /* GlobalChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalChatView.swift; sourceTree = "<group>"; };
-		2991A53E29A01A5F0010BD5F /* MessageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCard.swift; sourceTree = "<group>"; };
 		29CCEDF329BFCF5800452C0D /* CameraLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraLoader.swift; sourceTree = "<group>"; };
 		29F8D1AB298EC4BE00AF256A /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		29F8D1AD298EC6AA00AF256A /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
@@ -99,8 +101,8 @@
 		29202A90298915DC009FD057 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				29202A91298915EE009FD057 /* User.swift */,
 				294572C8298B0AF3007DDD78 /* Message.swift */,
+				29202A91298915EE009FD057 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -108,6 +110,7 @@
 		29397E582981D0650007F3D1 = {
 			isa = PBXGroup;
 			children = (
+				2987F17F29D22E4D00D581CD /* Shared */,
 				29397E632981D0650007F3D1 /* ChattingAPP_iOS */,
 				2987F10529CF9A1200D581CD /* ChatingAPP_macOS */,
 				29397E622981D0650007F3D1 /* Products */,
@@ -130,8 +133,6 @@
 			children = (
 				29F8D1AA298EC4AC00AF256A /* Extensions */,
 				294572C6298AF978007DDD78 /* GoogleService-Info.plist */,
-				29202A90298915DC009FD057 /* Models */,
-				29397E7A29827A620007F3D1 /* ViewModel */,
 				29397E7929827A4E0007F3D1 /* View */,
 				29397E642981D0650007F3D1 /* ChattingAPPApp.swift */,
 				29397E662981D0650007F3D1 /* ContentView.swift */,
@@ -157,7 +158,6 @@
 				2950D538298C0171007F0657 /* MessageView.swift */,
 				2950D53A298C3C65007F0657 /* SettingsView.swift */,
 				29F8D1AD298EC6AA00AF256A /* ProfileImageView.swift */,
-				2991A53E29A01A5F0010BD5F /* MessageCard.swift */,
 				2987F0FE29CE4A3500D581CD /* ImageViewerView.swift */,
 			);
 			path = View;
@@ -191,6 +191,15 @@
 				2987F10D29CF9A1600D581CD /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2987F17F29D22E4D00D581CD /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				29397E7A29827A620007F3D1 /* ViewModel */,
+				29202A90298915DC009FD057 /* Models */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		29F8D1AA298EC4AC00AF256A /* Extensions */ = {
@@ -372,7 +381,6 @@
 				294572C9298B0AF3007DDD78 /* Message.swift in Sources */,
 				29202A8D29891552009FD057 /* AuthenticationView.swift in Sources */,
 				2950D539298C0171007F0657 /* MessageView.swift in Sources */,
-				2991A53F29A01A5F0010BD5F /* MessageCard.swift in Sources */,
 				29397E652981D0650007F3D1 /* ChattingAPPApp.swift in Sources */,
 				29F8D1AE298EC6AA00AF256A /* ProfileImageView.swift in Sources */,
 				29202A92298915EE009FD057 /* User.swift in Sources */,
@@ -387,8 +395,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2987F10929CF9A1200D581CD /* ContentView.swift in Sources */,
+				2987F18129D23A4A00D581CD /* UserViewModel.swift in Sources */,
+				2987F18229D23A4C00D581CD /* MessageViewModel.swift in Sources */,
+				2987F18329D23A7500D581CD /* Message.swift in Sources */,
 				2987F11429CF9CAB00D581CD /* GlobalChatView.swift in Sources */,
 				2987F10729CF9A1200D581CD /* ChatingAPP_macOSApp.swift in Sources */,
+				2987F18429D23A7800D581CD /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,7 +529,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ChattingAPP/Preview Content\"";
 				DEVELOPMENT_TEAM = TU72F4GFFV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -548,7 +559,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ChattingAPP/Preview Content\"";
 				DEVELOPMENT_TEAM = TU72F4GFFV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -577,9 +587,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ChatingAPP_macOS/ChatingAPP_macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"ChatingAPP_macOS/Preview Content\"";
 				DEVELOPMENT_TEAM = TU72F4GFFV;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -606,9 +618,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ChatingAPP_macOS/ChatingAPP_macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"ChatingAPP_macOS/Preview Content\"";
 				DEVELOPMENT_TEAM = TU72F4GFFV;
 				ENABLE_HARDENED_RUNTIME = YES;
