@@ -91,6 +91,7 @@ struct SignInView: View {
                 }
                 .padding()
                 Spacer()
+                
             }
             .navigationTitle("Sign in")
         }

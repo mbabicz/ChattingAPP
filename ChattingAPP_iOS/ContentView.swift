@@ -45,6 +45,22 @@ struct ContentView: View {
                 user.syncUser()
             }
         }
+        .gesture(TapGesture().onEnded {
+            hideKeyboard()
+        })
+
+    }
+    private func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+extension UIWindow {
+    func topMostViewController() -> UIViewController? {
+        var topController = rootViewController
+        while let presentedViewController = topController?.presentedViewController {
+            topController = presentedViewController
+        }
+        return topController
     }
 }
 

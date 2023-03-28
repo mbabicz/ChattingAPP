@@ -41,8 +41,10 @@ struct GlobalChatView: View {
                             }
                         }
                         .onChange(of: fieldIsFocused){ _ in
-                            withAnimation{
-                                reader.scrollTo(bottomID)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                withAnimation{
+                                    reader.scrollTo(bottomID)
+                                }
                             }
                         }
                         .onAppear{
