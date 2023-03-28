@@ -7,12 +7,6 @@
 
 import Foundation
 
-//enum MessageType {
-//    case text
-//    case image
-//    case indicator
-//}
-
 struct Message: Codable, Hashable {
     
     var id: String
@@ -20,5 +14,4 @@ struct Message: Codable, Hashable {
     var sentDate: Date
     var message: String?
     var imageURL: String?
-    
 }

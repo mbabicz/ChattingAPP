@@ -21,7 +21,6 @@ struct MessageView: View {
                 Spacer()
             }
             HStack(alignment: .top, spacing: 0){
-                //Spacer()
                 if !isUserMessage, let sentBy = sentBy {
                     ProfileImageView(imageURL: sentBy.imageURL, width: 30, height: 30)
                         .padding(.top, 20)
@@ -55,7 +54,6 @@ struct MessageView: View {
                         }
                     }
                 }
-                //Spacer()
             }
             .padding(.trailing, 10)
             if !isUserMessage {

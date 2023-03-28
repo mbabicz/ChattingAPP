@@ -14,7 +14,6 @@ struct User: Codable {
     var userEmail: String
     var pushNotifications: Bool?
     var image: String
-    
 }
 
 extension User{

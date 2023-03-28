@@ -79,7 +79,6 @@ class UserViewModel: ObservableObject {
             self.showingAlert = true
         }
     }
-
     
     func signOut(){
         do{
@@ -112,7 +111,6 @@ class UserViewModel: ObservableObject {
         } catch {
             print("Error adding: \(error)")
         }
-        
     }
     
     func update(){
@@ -122,7 +120,6 @@ class UserViewModel: ObservableObject {
         } catch{
             print("error updating \(error)")
         }
-        
     }
 
     func getUserByUID(userID: String, completion: @escaping (User?) -> Void) {

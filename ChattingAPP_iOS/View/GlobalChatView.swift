@@ -10,8 +10,8 @@ import Introspect
 
 struct GlobalChatView: View {
     
-    @State var typingMessage: String = ""
     @StateObject var messageVM = MessageViewModel()
+    @State var typingMessage: String = ""
     @Namespace var bottomID
     @State private var showSendButton = false
     @FocusState private var fieldIsFocused: Bool
@@ -20,9 +20,7 @@ struct GlobalChatView: View {
     @State private var showImagePicker = false
     @State private var showCameraLoader = false
     @State private var showImageButtons = true
-    
     @State private var showScrollButton = false
-
 
     var body: some View {
         NavigationView{
@@ -43,11 +41,9 @@ struct GlobalChatView: View {
                             }
                         }
                         .onChange(of: fieldIsFocused){ _ in
-                            //DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                             withAnimation{
                                 reader.scrollTo(bottomID)
                             }
-                            //}
                         }
                         .onAppear{
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -56,7 +52,6 @@ struct GlobalChatView: View {
                                 }
                             }
                         }
-                        
                     }
                     if showScrollButton{
                         Button {
@@ -120,7 +115,6 @@ struct GlobalChatView: View {
                             }
                         }
                     }
- 
                     
                     if inputImage != nil {
                         HStack(alignment: .top){

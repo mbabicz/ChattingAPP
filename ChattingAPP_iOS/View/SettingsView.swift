@@ -15,7 +15,6 @@ struct SettingsView: View {
     @State private var inputImage: UIImage?
     @State private var image: Image?
     
-    
     @State private var showingImagePicker = false
     @State private var selectedImage: UIImage?
     
@@ -55,7 +54,6 @@ struct SettingsView: View {
                         .background(Color.green)
                         .cornerRadius(45)
                         .padding()
-                    
                 }
                 Spacer()
             }
@@ -79,7 +77,6 @@ struct SettingsView: View {
             ImagePicker(image: $inputImage)
         }
         .onChange(of: inputImage) { _ in loadImage() }
-        
     }
     
     func loadImage() {

@@ -83,7 +83,6 @@ struct SignInView: View {
                             .background(Color.green)
                             .cornerRadius(45)
                             .padding()
-
                     }
 
                     Text("Don't have an account yet?")
@@ -94,20 +93,19 @@ struct SignInView: View {
                 Spacer()
             }
             .navigationTitle("Sign in")
-
         }
     }
 }
 
 struct SignUpView: View {
     
+    @EnvironmentObject var user: UserViewModel
+    
     @State var email = ""
     @State var password = ""
     @State var passwordConfirmation = ""
     @State var username = ""
     
-    @EnvironmentObject var user: UserViewModel
-
     @State var isSecured: Bool = true
     @State var isSecuredConfirmation: Bool = true
 
@@ -150,7 +148,6 @@ struct SignUpView: View {
                                 .accentColor(.gray)
                         }
                         .padding()
-                        
                     }
                     
                     ZStack(alignment: .trailing){
@@ -237,7 +234,6 @@ struct ResetPasswordView: View {
                         user.alertMessage = "Fields cannot be empty"
                         user.showingAlert = true
                     }
-                    
                 } label: {
                     Text("Reset password")
                         .frame(width: 200, height: 50)
