@@ -15,3 +15,18 @@ pod 'Firebase/Messaging'
 pod 'FirebaseStorage' 
 
 end
+
+target 'ChattingAPP_macOS' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for ChattingAPP
+
+pod 'Firebase/Core'
+pod 'Firebase/Auth' 
+pod 'Firebase/Firestore'
+pod 'FirebaseFirestoreSwift' 
+pod 'Firebase/Messaging' 
+pod 'FirebaseStorage' 
+
+end
